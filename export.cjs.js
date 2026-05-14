@@ -1,0 +1,69 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var global$1 = require('./global.cjs.js');
+require('./object-get-own-property-descriptor.cjs.js');
+var createNonEnumerableProperty$1 = require('./create-non-enumerable-property.cjs.js');
+var defineBuiltIn$1 = require('./define-built-in.cjs.js');
+var defineGlobalProperty$1 = require('./define-global-property.cjs.js');
+var copyConstructorProperties$1 = require('./copy-constructor-properties.cjs.js');
+var isForced$1 = require('./is-forced.cjs.js');
+var objectGetOwnPropertyDescriptor = require('../../../_virtual/object-get-own-property-descriptor.cjs.js');
+
+var global = global$1.global;
+var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.__exports.f;
+var createNonEnumerableProperty = createNonEnumerableProperty$1.createNonEnumerableProperty;
+var defineBuiltIn = defineBuiltIn$1.defineBuiltIn;
+var defineGlobalProperty = defineGlobalProperty$1.defineGlobalProperty;
+var copyConstructorProperties = copyConstructorProperties$1.copyConstructorProperties;
+var isForced = isForced$1.isForced_1;
+
+/*
+  options.target         - name of the target object
+  options.global         - target is the global object
+  options.stat           - export as static methods of target
+  options.proto          - export as prototype methods of target
+  options.real           - real prototype method for the `pure` version
+  options.forced         - export even if the native feature is available
+  options.bind           - bind methods to the target, required for the `pure` version
+  options.wrap           - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe         - use the simple assignment of property instead of delete + defineProperty
+  options.sham           - add a flag to not completely full polyfills
+  options.enumerable     - export as enumerable property
+  options.dontCallGetSet - prevent calling a getter on target
+  options.name           - the .name of the function if it does not match the key
+*/
+var _export = function (options, source) {
+  var TARGET = options.target;
+  var GLOBAL = options.global;
+  var STATIC = options.stat;
+  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
+  if (GLOBAL) {
+    target = global;
+  } else if (STATIC) {
+    target = global[TARGET] || defineGlobalProperty(TARGET, {});
+  } else {
+    target = global[TARGET] && global[TARGET].prototype;
+  }
+  if (target) for (key in source) {
+    sourceProperty = source[key];
+    if (options.dontCallGetSet) {
+      descriptor = getOwnPropertyDescriptor(target, key);
+      targetProperty = descriptor && descriptor.value;
+    } else targetProperty = target[key];
+    FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
+    // contained in target
+    if (!FORCED && targetProperty !== undefined) {
+      if (typeof sourceProperty == typeof targetProperty) continue;
+      copyConstructorProperties(sourceProperty, targetProperty);
+    }
+    // add a flag to not completely full polyfills
+    if (options.sham || (targetProperty && targetProperty.sham)) {
+      createNonEnumerableProperty(sourceProperty, 'sham', true);
+    }
+    defineBuiltIn(target, key, sourceProperty, options);
+  }
+};
+
+exports._export = _export;
