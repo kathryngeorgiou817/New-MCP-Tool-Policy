@@ -1,0 +1,63 @@
+{
+  "name": "bash-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ciscodesignsystems/cds-magnetic-blue-theme-web": "*",
+    "@ciscodesignsystems/cds-magnetic-theme-web": "*",
+    "@ciscodesignsystems/cds-react-badge": "*",
+    "@ciscodesignsystems/cds-react-button": "*",
+    "@ciscodesignsystems/cds-react-card": "*",
+    "@ciscodesignsystems/cds-react-checkbox": "*",
+    "@ciscodesignsystems/cds-react-container": "*",
+    "@ciscodesignsystems/cds-react-divider": "*",
+    "@ciscodesignsystems/cds-react-filter-bar": "*",
+    "@ciscodesignsystems/cds-react-flex": "*",
+    "@ciscodesignsystems/cds-react-footer": "*",
+    "@ciscodesignsystems/cds-react-header": "*",
+    "@ciscodesignsystems/cds-react-heading": "*",
+    "@ciscodesignsystems/cds-react-icons": "*",
+    "@ciscodesignsystems/cds-react-line-chart": "*",
+    "@ciscodesignsystems/cds-react-link": "*",
+    "@ciscodesignsystems/cds-react-menu": "*",
+    "@ciscodesignsystems/cds-react-nav": "*",
+    "@ciscodesignsystems/cds-react-pagination": "*",
+    "@ciscodesignsystems/cds-react-search": "*",
+    "@ciscodesignsystems/cds-react-select": "*",
+    "@ciscodesignsystems/cds-react-tab": "*",
+    "@ciscodesignsystems/cds-react-table": "*",
+    "@ciscodesignsystems/cds-react-tag": "*",
+    "@ciscodesignsystems/cds-react-text": "*",
+    "@ciscodesignsystems/cds-react-text-input": "*",
+    "@ciscodesignsystems/cds-react-theme-provider": "*",
+    "@phosphor-icons/react": "^2.1.10",
+    "@tanstack/react-table": "^8.21.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vite": "^8.0.0"
+  },
+  "overrides": {
+    "lodash": "^4.18.1",
+    "brace-expansion": "^5.0.5"
+  }
+}
